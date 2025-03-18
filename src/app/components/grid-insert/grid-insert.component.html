@@ -1,0 +1,10 @@
+<form (ngSubmit)="onSubmit()" #createForm="ngForm" class="insert-form">
+  <div *ngFor="let column of columns" class="grid-insert-input-div">
+    <label [for]="column.name">{{column.name | titlecase}}</label>
+    <input [attr.type]="column.dataType" [attr.name]="column.name"
+      [(ngModel)]="formData[(column.name) ? column.name : '' ]" [ngModelOptions]="{standalone: true}" />
+  </div>
+  <div class="button-div">
+    <button>Enter</button>
+  </div>
+</form>

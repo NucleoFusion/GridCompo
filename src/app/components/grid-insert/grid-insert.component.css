@@ -1,0 +1,33 @@
+.grid-insert-input-div {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  margin: 2vh 0vw;
+
+  max-width: 70vw;
+}
+
+.insert-form {
+  border: solid black 1px;
+
+  padding: 2vw;
+
+  margin-top: 10vh;
+}
+
+.insert-form>.button-div {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.insert-form button {
+  width: 10vw;
+  height: 4vh;
+}
