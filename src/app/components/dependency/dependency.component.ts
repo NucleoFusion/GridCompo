@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Column } from 'devextreme/ui/data_grid';
 import { GridComponent } from '../grid/grid.component';
+import Editor from 'devextreme/ui/editor/editor';
 
 @Component({
   selector: 'app-dependency',
@@ -77,22 +78,26 @@ export class DependencyComponent {
 
 
   handlePrepare(e: any) {
+    if (e.dataField === "countryA" || e.dataField === "countryB") {
+      e.editorOptions.onValueChanged = (args: any) => {
+        e.component.cellValue(e.row.rowIndex, e.dataField === "countryA" ? 'stateA' : 'stateB', null);
+        e.component.saveEditData(); // Save changes in batch edit mode
+      };
+    }
+
     if (e.dataField === "stateA") {
       var selectedCountry = e.row.data.countryA
-      e.editorOptions.dataSource = this.states.filter(obj => obj.country == selectedCountry || selectedCountry == "").map(obj => obj.state)
+      var data = this.states.filter(obj => obj.country == selectedCountry || selectedCountry == "").map(obj => obj.state)
+
+      e.editorOptions.disabled = data.length === 0;
+      e.editorOptions.dataSource = data
+
     } else if (e.dataField === "stateB") {
       var selectedCountry = e.row.data.countryB
-      e.editorOptions.dataSource = this.states.filter(obj => obj.country == selectedCountry || selectedCountry == "").map(obj => obj.state)
-    }
-  }
+      var data = this.states.filter(obj => obj.country == selectedCountry || selectedCountry == "").map(obj => obj.state)
 
-  handleCellValueChanged(e: any) {
-    if (e.dataField === 'countryA') {
-      e.component.cellValue(e.rowIndex, 'stateA', null); // Reset city value when country changes
-      e.component.refresh(); // Refresh the grid to apply changes
-    } else if (e.dataField === 'countryB') {
-      e.component.cellValue(e.rowIndex, 'stateB', null); // Reset city value when country changes
-      e.component.refresh(); // Refresh the grid to apply changes
+      e.editorOptions.disabled = data.length === 0
+      e.editorOptions.dataSource = data
     }
   }
 }

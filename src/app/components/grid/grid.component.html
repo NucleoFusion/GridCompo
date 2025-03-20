@@ -1,17 +1,10 @@
-<dx-data-grid class="dx-widget dx-datagrid" [dataSource]="data" (onEditorPreparing)="handlePrep($event)"
-  (onCellValueChanged)="handleCellValueChanged($event)">
-  <dxo-editing [allowAdding]="true" [allowDeleting]="true" [allowUpdating]="true" [mode]="'cell'">
-    <dxo-popup [title]="'Edit Students'" [showTitle]="true">
-    </dxo-popup>
-
-
-    <dxo-form>
-      <!-- <dxi-item *ngFor="let item of columns"></dxi-item> -->
-    </dxo-form>
+<dx-data-grid class="dx-widget dx-datagrid" [dataSource]="data" (onEditorPreparing)="handlePrep($event)">
+  <dxo-editing [allowAdding]=" true" [allowDeleting]="true" [allowUpdating]="true" [mode]="'batch'">
   </dxo-editing>
 
   <dxi-column *ngFor="let column of columns" [dataField]="column.dataField" [dataType]="column.dataType"
-    [caption]="column.caption" [visible]="column.visible !== false" [lookup]="column.lookup ? column.lookup : null">
+    [caption]="column.caption" [visible]="column.visible !== false" [lookup]="column.lookup ? column.lookup : null"
+    [allowEditing]="true">
   </dxi-column>
 
   <!-- For Icons -->

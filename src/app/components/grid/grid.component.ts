@@ -14,20 +14,13 @@ export class GridComponent {
   @Input() columns !: Array<Column>;
   @Input() data!: any[];
   @Output() EditorPrepare = new EventEmitter<any>();
-  @Output() CellChange = new EventEmitter<any>();
-
-
-  dependency = {};
 
   handleInput(eventData: { [key: string]: any }) {
     this.data.push(eventData)
   }
 
-  handleCellValueChanged(e: any) {
-    this.CellChange.emit(e)
-  }
-
   handlePrep(e: any) {
     this.EditorPrepare.emit(e);
+    // e.editorOptions.onValueChanged += this.handleCellValueChanged
   }
 }
